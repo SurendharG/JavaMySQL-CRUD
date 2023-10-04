@@ -19,12 +19,17 @@ public class DB_CODE {
 			}
 				public boolean login(String username,String password) {
 					boolean c=false;
-							try {
-							String query = 
-							"select * from login_staff WHERE user='"+username+"'and pass='"+password+"'";
-							Statement smt=con.createStatement();
-							c=smt.execute(query);
-							}catch(SQLException e) {	System.out.println(e);		}
+							try { String query = "SELECT * FROM login_staff WHERE user = ? AND pass = ?";
+					        PreparedStatement pstmt = con.prepareStatement(query);
+					        pstmt.setString(1, username);
+					        pstmt.setString(2, password);
+					        
+					        ResultSet resultSet = pstmt.executeQuery();
+					        
+					        if (resultSet.next()) {
+					            c = true;
+					        }
+					   }catch(SQLException e) {	System.out.println(e);		}
 							return c;
 				}	
 			
@@ -94,14 +99,33 @@ public class DB_CODE {
 				}catch(SQLException e) {	System.out.println(e);		}
 				return c;
 			}
-			public boolean logins(int regno,String password) {
-				boolean c=false;
-						try {
-						String query = 
-						"select * from student_details WHERE regno='"+regno+"'and password='"+password+"'";
-						Statement smt=con.createStatement();
-						c=smt.execute(query);
-						}catch(SQLException e) {	System.out.println(e);		}
-						return c;}
-
+			
+			public boolean stuselect(int regno,String dob) {
+				boolean cd=false;
+						try { String query = "SELECT * FROM student_details WHERE regno = ? AND dob = ?";
+				        PreparedStatement pstmt = con.prepareStatement(query);
+				        pstmt.setInt(1, regno);
+				        pstmt.setString(2, dob);
+				        ResultSet resultSet = pstmt.executeQuery();
+				        if (resultSet.next()) {
+				            cd = true;
+				        }
+				   }catch(SQLException e) {	System.out.println(e);		}
+						return cd;}
+			public void studentview(int regno,String password) {	
+			try {	
+				String query="select *from student_details where regno=? AND password=?;";
+				PreparedStatement pst=con.prepareStatement(query);
+				pst.setInt(1,regno);
+				pst.setString(2,password);
+				ResultSet rs=pst.executeQuery();		
+				while(rs.next()) {
+					System.out.println(rs.getInt(1)+"\t"+rs.getString(2)+"\t"+
+							rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getString(5)+"\t"+rs.getInt(6)+"\t"+rs.getString(7)+"\t"+rs.getString(8)+"\t"+rs.getString(9));
+				}
+				}catch(SQLException e) {	System.out.println(e);		}
+			
+			
+			
+			}
 }
