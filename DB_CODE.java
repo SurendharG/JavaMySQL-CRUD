@@ -6,35 +6,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 public class DB_CODE {
-	
-		private Connection con;
-		//Connectivity Code
-			public DB_CODE() {
-				String dburl="jdbc:mysql://localhost:3306/institude";
-				String dbuser="root";
-				String dbpass="";	
-				try {	
+	private Connection con;
+			public DB_CODE() 
+				{			String dburl="jdbc:mysql://localhost:3306/institude";
+							String dbuser="root";
+							String dbpass="";	
+			try {	
 					con=DriverManager.getConnection(dburl,dbuser,dbpass);	
-				}catch(SQLException e) {	System.out.println(e);		}
-			}
-				public boolean login(String username,String password) {
-					boolean c=false;
-							try { String query = "SELECT * FROM login_staff WHERE user = ? AND pass = ?";
+				}	
+			catch(SQLException e) 
+				{		System.out.println(e);		}
+				}
+							public boolean login(String username,String password) {
+								boolean c=false;
+			try { String query = "SELECT * FROM login_staff WHERE user = ? AND pass = ?";
 					        PreparedStatement pstmt = con.prepareStatement(query);
 					        pstmt.setString(1, username);
 					        pstmt.setString(2, password);
-					        
 					        ResultSet resultSet = pstmt.executeQuery();
-					        
-					        if (resultSet.next()) {
+					       if (resultSet.next()) {
 					            c = true;
 					        }
 					   }catch(SQLException e) {	System.out.println(e);		}
 							return c;
-				}	
-			
-		///Insertion Code
-			public int insert(int regno,String name,String dob,String gender,String course,int fees,String contact_no,String address,String password) {
+				}
+		public int insert(int regno,String name,String dob,String gender,String course,int fees,String contact_no,String address,String password) {
 				int c=0;
 				try {	
 				String query="insert into student_details values(?,?,?,?,?,?,?,?,?);";
@@ -52,8 +48,7 @@ public class DB_CODE {
 				}catch(SQLException e) {	System.out.println(e);		}
 				return c;
 			}
-		//Updation Code
-			public int update(int regno,int fees) {
+		public int update(int regno,int fees) {
 				int c=0;
 				try {	
 					String q="update student_details set fees=? where regno=?";
@@ -64,8 +59,7 @@ public class DB_CODE {
 				}catch(SQLException e) {	System.out.println(e);		}
 				return c;
 			}	
-		//Selection Code
-			public void select() {
+		public void select() {
 				try {	
 				String query="select *from student_details";
 				PreparedStatement pst=con.prepareStatement(query);
@@ -76,8 +70,7 @@ public class DB_CODE {
 				}
 				}catch(SQLException e) {	System.out.println(e);		}
 			}
-		//Deletion Code
-			public int delete(int regno) {
+		public int delete(int regno) {
 				int c=0;
 				try {	
 					String q="delete from student_details where regno=?";
@@ -87,8 +80,7 @@ public class DB_CODE {
 				}catch(SQLException e) {	System.out.println(e);		}
 				return c;		
 			}
-			//inserttion for staff
-			public int insert(String name,String pas) {
+		public int insert(String name,String pas) {
 				int c=0;
 				try {	
 				String query="insert into login_staff values(?,?);";
@@ -99,8 +91,7 @@ public class DB_CODE {
 				}catch(SQLException e) {	System.out.println(e);		}
 				return c;
 			}
-			
-			public boolean stuselect(int regno,String dob) {
+		public boolean stuselect(int regno,String dob) {
 				boolean cd=false;
 						try { String query = "SELECT * FROM student_details WHERE regno = ? AND dob = ?";
 				        PreparedStatement pstmt = con.prepareStatement(query);
@@ -112,7 +103,7 @@ public class DB_CODE {
 				        }
 				   }catch(SQLException e) {	System.out.println(e);		}
 						return cd;}
-			public void studentview(int regno,String password) {	
+		public void studentview(int regno,String password) {	
 			try {	
 				String query="select *from student_details where regno=? AND password=?;";
 				PreparedStatement pst=con.prepareStatement(query);
