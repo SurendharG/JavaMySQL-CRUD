@@ -1,32 +1,110 @@
  
 mysql> use institude;
 Database changed
-mysql> desc login_staff;
-+-------+--------------+------+-----+---------+-------+
-| Field | Type         | Null | Key | Default | Extra |
-+-------+--------------+------+-----+---------+-------+
-| user  | varchar(255) | NO   | PRI | NULL    |       |
-| pass  | int(11)      | NO   |     | NULL    |       |
-+-------+--------------+------+-----+---------+-------+
+mysql> desc account_team;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| username | varchar(45) | NO   | PRI | NULL    |       |
+| password | varchar(45) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+mysql> desc admission_team;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| username | varchar(45) | NO   | PRI | NULL    |       |
+| password | varchar(45) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+mysql> desc admin_details;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| username | varchar(250) | NO   | PRI | NULL    |       |
+| password | varchar(250) | NO   |     | NULL    |       |
+| Axis     | varchar(100) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
 
 mysql> desc login_staff;
-+-------+--------------+------+-----+---------+-------+
-| Field | Type         | Null | Key | Default | Extra |
-+-------+--------------+------+-----+---------+-------+
-| user  | varchar(255) | NO   | PRI | NULL    |       |
-| pass  | int(11)      | NO   |     | NULL    |       |
-+-------+--------------+------+-----+---------+-------+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| username | varchar(45) | NO   | PRI | NULL    |       |
+| password | varchar(45) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
 
-mysql> select * from login_staff;
-+----------+-------+
-| user     | pass  |
-+----------+-------+
-| Sudhakar | 15426 |
-+----------+-------+
 
-mysql> select * from student_details;
-+------------+-------+------------+--------+--------+-------+------------+---------------------------------+---------------+
-| regno      | name  | dob        | gender | course | fees  | contact_no | address                         | password      |
-+------------+-------+------------+--------+--------+-------+------------+---------------------------------+---------------+
-| 1234567890 | Praga | 2003-02-20 | male   | beece  | 25465 | 9876543210 | 154,kalaimamani road,vdm,607803 | praga20030220 |
-+------------+-------+------------+--------+--------+-------+------------+---------------------------------+---------------+
+mysql> desc student_details;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| regno        | varchar(15)  | NO   | PRI | NULL    |       |
+| name         | varchar(50)  | YES  |     | NULL    |       |
+| dob          | date         | YES  |     | NULL    |       |
+| gender       | varchar(20)  | YES  |     | NULL    |       |
+| course       | varchar(20)  | YES  |     | NULL    |       |
+| Total_fees   | double       | YES  |     | NULL    |       |
+| paid_fees    | double       | YES  |     | NULL    |       |
+| pending_fees | double       | YES  |     | NULL    |       |
+| contact_no   | bigint(20)   | YES  |     | NULL    |       |
+| address      | varchar(100) | YES  |     | NULL    |       |
+| password     | varchar(30)  | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+
+mysql> desc review;
++---------------+---------------+------+-----+---------+----------------+
+| Field         | Type          | Null | Key | Default | Extra          |
++---------------+---------------+------+-----+---------+----------------+
+| Star          | double        | NO   |     | NULL    |                |
+| ownthink      | varchar(1000) | YES  |     | NULL    |                |
+| Email         | varchar(255)  | YES  |     | NULL    |                |
+| Name          | varchar(100)  | YES  |     | NULL    |                |
+| review_number | int(11)       | NO   | PRI | NULL    | auto_increment |
++---------------+---------------+------+-----+---------+----------------+
+
+
+mysql> show tables;
++-----------------------+
+| Tables_in_institude   |
++-----------------------+
+| about_us              |
+| account_team          |
+| accountmaintenance    |
+| admin_details         |
+| admission_team        |
+| application_form      |
+| contact_details       |
+| fessuptademaintenance |
+| login_staff           |
+| review                |
+| student_details       |
++-----------------------+
+
+
+mysql> desc accountmaintenance;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| username       | varchar(500) | YES  |     | NULL    |       |
+| date           | date         | YES  |     | NULL    |       |
+| time           | time         | YES  |     | NULL    |       |
+| regno          | varchar(20)  | YES  |     | NULL    |       |
+| student_name   | varchar(500) | YES  |     | NULL    |       |
+| dept           | varchar(50)  | YES  |     | NULL    |       |
+| amount_of_paid | double       | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+
+mysql> desc fessuptademaintenance;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| username           | varchar(500) | YES  |     | NULL    |       |
+| date               | date         | YES  |     | NULL    |       |
+| time               | time         | YES  |     | NULL    |       |
+| regno              | varchar(20)  | YES  |     | NULL    |       |
+| student_name       | varchar(500) | YES  |     | NULL    |       |
+| dept               | varchar(100) | YES  |     | NULL    |       |
+| before_total_fees  | double       | YES  |     | NULL    |       |
+| updated_total_fees | double       | YES  |     | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
